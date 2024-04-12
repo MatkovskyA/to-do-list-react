@@ -1,6 +1,10 @@
+import { useState } from "react"
 import "./todoList.css"
 
 const TodoList = ({ todo, setTodo }) => {
+
+  const [edit, setEdit] = useState(null)
+  const [value, setValue] = useState('')
   
   const deleteTodo = (id) => {
     let newTodo = [...todo].filter(item => item.id !== id)
@@ -17,16 +21,31 @@ const TodoList = ({ todo, setTodo }) => {
     setTodo(newTodo)
   }
 
-  
+  const editTodo = (id, title) => {
+    setEdit(id)
+    setValue(title)
+  }
 
   return (
     <div>
       {
         todo.map(item => (
           <div key={item.id}>
-            <div>{item.title}</div>
-            <button onClick={() => deleteTodo(item.id)}>Удалить задачу</button>
-            <button onClick={() => statusTodo(item.id)}>Закрыть задачу</button>
+            {
+              edit == item.id ? <div>
+                  <input onChange={setValue} value={value}/>
+                </div> : <div>{item.title}</div>
+            }
+
+            {
+              edit == item.id ? 
+                <button>Сохранить</button> :
+                <div>
+                  <button onClick={() => deleteTodo(item.id)}>Удалить задачу</button>
+                  <button onClick={() => editTodo(item.id, item.title)}>Редактировать задачу</button>
+                  <button onClick={() => statusTodo(item.id)}>Закрыть задачу</button>
+                </div>
+            }
           </div>
         ))
       }

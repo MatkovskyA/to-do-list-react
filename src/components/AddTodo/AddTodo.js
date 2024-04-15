@@ -7,21 +7,21 @@ const AddTodo = ({ todo, setTodo}) => {
 
   const saveTodo = () => {
 
-    const uniqueId = uuidv4()
+  const uniqueId = uuidv4() 
     setTodo(
       [...todo, {
         id: uniqueId,
         title: value,
         status: true
-      } ]
-    )
+    } ]
+  )
     setValue('');
   }
 
   return (
-    <div>
-      <input type="text" placeholder="Введите задачу" value={value} onChange={(e) => setValue(e.target.value)}/>
-      <button onClick={saveTodo}>Сохранить</button>
+    <div className="task">
+      <input className="task__input" type="text" placeholder="Введите задачу" value={value} onChange={(e) => setValue(e.target.value)} />
+      <button className="task__btn" onClick={saveTodo} disabled={!value} >Добавить задачу</button>
     </div>
   )
 }

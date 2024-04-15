@@ -1,5 +1,9 @@
 import { useState } from "react"
 import "./todoList.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave, faTrash, faPenToSquare, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+
+
 
 const TodoList = ({ todo, setTodo }) => {
 
@@ -8,16 +12,6 @@ const TodoList = ({ todo, setTodo }) => {
   
   const deleteTodo = (id) => {
     let newTodo = [...todo].filter(item => item.id !== id)
-    setTodo(newTodo)
-  }
-
-  const statusTodo = (id) => {
-    let newTodo = [...todo].filter(item => {
-      if(item.id == id) {
-        item.status = !item.status
-      }
-      return item
-    })
     setTodo(newTodo)
   }
 
@@ -37,27 +31,28 @@ const TodoList = ({ todo, setTodo }) => {
     setEdit(null)
   }
 
+  
+
   return (
-    <div>
+    <div className="todoList">
       {
         todo.map(item => (
-          <div key={item.id}>
+          <div key={item.id} className="todoList__item">
             {
               edit == item.id ? 
               <div>
-                <input value={value} onChange={(e) => setValue(e.target.value)} />
+                <input className="todoList__change-title" value={value} onChange={(e) => setValue(e.target.value)} />
               </div> : 
-              <div>{item.title}</div>
+              <div className="todoList__title">{item.title}</div>
             }
             {
               edit == item.id ? 
                 <div>
-                  <button onClick={() => saveTodo(item.id)}>Сохранить</button> 
+                  <button className="todoList__btn-save btn" onClick={() => saveTodo(item.id)}><FontAwesomeIcon icon={faSave}/></button> 
                 </div> :
-                <div>
-                  <button onClick={() => deleteTodo(item.id)}>Удалить задачу</button>
-                  <button onClick={() => editTodo(item.id, item.title)}>Редактировать задачу</button>
-                  <button onClick={() => statusTodo(item.id)}>Закрыть задачу</button>
+                <div className="todoList__btns">
+                  <button className="todoList__btn-delete todoList__btn" onClick={() => deleteTodo(item.id)}><FontAwesomeIcon icon={faTrash} /></button>
+                  <button className="todoList__btn-change todoList__btn" onClick={() => editTodo(item.id, item.title)}><FontAwesomeIcon icon={faPenToSquare} /></button>
                 </div>
             }
           </div>

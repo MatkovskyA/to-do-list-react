@@ -1,0 +1,35 @@
+.task {
+  width: 100%;
+  display: flex;
+  justify-content: center;  
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.task__input {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.task__input:active {
+  border: 1px solid green;
+}
+
+.task__btn {
+  max-width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: rgb(13, 19, 17);
+  border: none;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  transition: all 0.3s; 
+  cursor: pointer;
+}
+
+.task__btn:hover {
+  background: rgb(253,187,45);
+  background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);
+  scale: 1.05;
+}

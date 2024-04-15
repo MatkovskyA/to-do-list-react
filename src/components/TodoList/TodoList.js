@@ -26,20 +26,34 @@ const TodoList = ({ todo, setTodo }) => {
     setValue(title)
   }
 
+  const saveTodo = (id) => {
+    let newTodo = [...todo].map(item => {
+      if(item.id == id) {
+        item.title = value;
+      }
+      return item
+    })
+    setTodo(newTodo)
+    setEdit(null)
+  }
+
   return (
     <div>
       {
         todo.map(item => (
           <div key={item.id}>
             {
-              edit == item.id ? <div>
-                  <input onChange={setValue} value={value}/>
-                </div> : <div>{item.title}</div>
+              edit == item.id ? 
+              <div>
+                <input value={value} onChange={(e) => setValue(e.target.value)} />
+              </div> : 
+              <div>{item.title}</div>
             }
-
             {
               edit == item.id ? 
-                <button>Сохранить</button> :
+                <div>
+                  <button onClick={() => saveTodo(item.id)}>Сохранить</button> 
+                </div> :
                 <div>
                   <button onClick={() => deleteTodo(item.id)}>Удалить задачу</button>
                   <button onClick={() => editTodo(item.id, item.title)}>Редактировать задачу</button>
